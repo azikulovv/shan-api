@@ -6,10 +6,11 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
-    "start": "node /app/dist/src/server.js",
+    "start": "node dist/src/server.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
-    "prisma:migrate:deploy": "prisma migrate deploy"
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "seed:system-user": "tsx src/prisma/seed-system-user.ts"
   },
   "keywords": [],
   "author": "",

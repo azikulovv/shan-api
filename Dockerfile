@@ -48,7 +48,7 @@ COPY prisma.config.ts ./
 
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/src/prisma ./src/prisma
-
+COPY --from=builder /app/src/generated ./src/generated
 COPY --from=builder /app/src/generated ./dist/src/generated
 
 RUN mkdir -p /app/data
@@ -57,4 +57,4 @@ ENV NODE_ENV=production
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "yarn prisma:migrate:deploy && yarn start"]
+CMD ["sh", "-c", "yarn prisma:migrate:deploy && yarn seed:system-user && yarn start"]
