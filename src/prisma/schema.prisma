@@ -35,6 +35,21 @@ enum SubscriptionStatus {
   EXPIRED
 }
 
+enum SubscriptionPaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+}
+
+enum SubscriptionPaymentProvider {
+  CASH
+  KASPI_TRANSFER
+  BANK_TRANSFER
+  ONLINE
+  MANUAL
+}
+
 model Restaurant {
   id      String  @id @default(uuid())
   name    String
@@ -175,12 +190,14 @@ model SubscriptionPlan {
 }
 
 model SubscriptionPayment {
-  id       String @id @default(uuid())
+  id       String  @id @default(uuid())
   amount   Int
-  currency String @default("KZT")
-  status   String // PENDING / PAID / FAILED
+  months   Int     @default(1)
+  currency String  @default("KZT")
+  comment  String?
 
-  provider   String?
+  status     SubscriptionPaymentStatus
+  provider   SubscriptionPaymentProvider
   externalId String?
   paidAt     DateTime?
 
@@ -189,6 +206,16 @@ model SubscriptionPayment {
 
   planId String?
   plan   SubscriptionPlan? @relation(fields: [planId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SystemUser {
+  id           String @id @default(uuid())
+  name         String
+  email        String @unique
+  passwordHash String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

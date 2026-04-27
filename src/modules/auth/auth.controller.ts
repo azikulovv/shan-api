@@ -6,7 +6,6 @@ import {
   getMeService,
 } from './auth.service'
 import { AuthRequest } from '../../shared/middlewares/auth.middleware'
-import { prisma } from '../../prisma/prisma'
 
 export const registerOwner = async (req: Request, res: Response) => {
   try {

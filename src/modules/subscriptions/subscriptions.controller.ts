@@ -1,6 +1,6 @@
-import type { Response } from 'express'
+import type { NextFunction, Request, Response } from 'express'
 import type { AuthRequest } from '../../shared/middlewares/auth.middleware'
-import { getMySubscriptionService } from './subscriptions.service'
+import { activateSubscriptionService, getMySubscriptionService } from './subscriptions.service'
 
 export const getMySubscription = async (req: AuthRequest, res: Response) => {
   try {
@@ -20,5 +20,36 @@ export const getMySubscription = async (req: AuthRequest, res: Response) => {
     return res.status(500).json({
       message: 'Internal error',
     })
+  }
+}
+
+export const activateSubscriptionController = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { restaurantId } = req.params
+
+    if (!restaurantId) {
+      return res.status(404).json({
+        message: 'restaurantId not found',
+      })
+    }
+
+    const result = await activateSubscriptionService(String(restaurantId), {
+      planId: req.body.planId,
+      amount: req.body.amount,
+      months: req.body.months,
+      provider: req.body.provider,
+      comment: req.body.comment,
+    })
+
+    res.status(200).json({
+      message: 'Subscription activated successfully',
+      data: result,
+    })
+  } catch (error) {
+    next(error)
   }
 }

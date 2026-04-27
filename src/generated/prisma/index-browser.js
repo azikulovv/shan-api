@@ -213,13 +213,24 @@ exports.Prisma.SubscriptionPlanScalarFieldEnum = {
 exports.Prisma.SubscriptionPaymentScalarFieldEnum = {
   id: 'id',
   amount: 'amount',
+  months: 'months',
   currency: 'currency',
+  comment: 'comment',
   status: 'status',
   provider: 'provider',
   externalId: 'externalId',
   paidAt: 'paidAt',
   restaurantId: 'restaurantId',
   planId: 'planId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SystemUserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  passwordHash: 'passwordHash',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -266,6 +277,21 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   PAID: 'PAID'
 };
 
+exports.SubscriptionPaymentStatus = exports.$Enums.SubscriptionPaymentStatus = {
+  PENDING: 'PENDING',
+  PAID: 'PAID',
+  FAILED: 'FAILED',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.SubscriptionPaymentProvider = exports.$Enums.SubscriptionPaymentProvider = {
+  CASH: 'CASH',
+  KASPI_TRANSFER: 'KASPI_TRANSFER',
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  ONLINE: 'ONLINE',
+  MANUAL: 'MANUAL'
+};
+
 exports.Prisma.ModelName = {
   Restaurant: 'Restaurant',
   User: 'User',
@@ -274,7 +300,8 @@ exports.Prisma.ModelName = {
   Banquet: 'Banquet',
   Payment: 'Payment',
   SubscriptionPlan: 'SubscriptionPlan',
-  SubscriptionPayment: 'SubscriptionPayment'
+  SubscriptionPayment: 'SubscriptionPayment',
+  SystemUser: 'SystemUser'
 };
 
 /**
