@@ -1,3 +1,10 @@
-.env
-.DS_Store
 node_modules/
+
+.env
+
+.DS_Store
+
+src/prisma/dev.db
+
+dist/
+build/
