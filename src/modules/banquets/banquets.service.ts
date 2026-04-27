@@ -26,6 +26,12 @@ export const getBanquetsService = async (restaurantId: string) => {
     include: {
       client: true,
       hall: true,
+      createdBy: {
+        omit: {
+          passwordHash: true,
+          restaurantId: true,
+        },
+      },
     },
     orderBy: { date: 'asc' },
   })
