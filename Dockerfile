@@ -19,8 +19,9 @@ COPY tsconfig.json ./
 COPY prisma.config.ts ./
 COPY src ./src
 
+ENV SHANYRAQ_DATABASE_URL="postgresql://user:password@localhost:5432/shanyraq?schema=public"
+ENV SHANYRAQ_DIRECT_URL="postgresql://user:password@localhost:5432/shanyraq?schema=public"
 ENV NODE_ENV=production
-ENV SHANYRAQ_DATABASE_URL=file:/app/data/shan.db
 
 RUN yarn prisma:generate
 RUN yarn build
@@ -53,8 +54,6 @@ COPY --from=builder /app/src/generated ./dist/src/generated
 RUN mkdir -p /app/data
 
 ENV NODE_ENV=production
-ENV SHANYRAQ_PORT=3001
-ENV SHANYRAQ_DATABASE_URL=file:/app/data/shan.db
 
 EXPOSE 3001
 
