@@ -26,6 +26,7 @@ export const registerOwner = async (req: Request, res: Response) => {
     res.status(500).json({
       message: 'Internal error',
     })
+    console.log(error)
   }
 }
 

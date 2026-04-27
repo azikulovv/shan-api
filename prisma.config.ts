@@ -7,6 +7,6 @@ export default defineConfig({
     path: 'src/prisma/migrations',
   },
   datasource: {
-    url: env('SHANYRAQ_DATABASE_URL'),
+    url: env('SHANYRAQ_DIRECT_URL'),
   },
 })
