@@ -1632,10 +1632,12 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     banquetsCreated: number
+    clients: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     banquetsCreated?: boolean | UserCountOutputTypeCountBanquetsCreatedArgs
+    clients?: boolean | UserCountOutputTypeCountClientsArgs
   }
 
   // Custom InputTypes
@@ -1654,6 +1656,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountBanquetsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BanquetWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClientWhereInput
   }
 
 
@@ -3235,6 +3244,7 @@ export namespace Prisma {
     updatedAt?: boolean
     restaurant?: boolean | RestaurantDefaultArgs<ExtArgs>
     banquetsCreated?: boolean | User$banquetsCreatedArgs<ExtArgs>
+    clients?: boolean | User$clientsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3280,6 +3290,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     restaurant?: boolean | RestaurantDefaultArgs<ExtArgs>
     banquetsCreated?: boolean | User$banquetsCreatedArgs<ExtArgs>
+    clients?: boolean | User$clientsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3294,6 +3305,7 @@ export namespace Prisma {
     objects: {
       restaurant: Prisma.$RestaurantPayload<ExtArgs>
       banquetsCreated: Prisma.$BanquetPayload<ExtArgs>[]
+      clients: Prisma.$ClientPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3701,6 +3713,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     restaurant<T extends RestaurantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantDefaultArgs<ExtArgs>>): Prisma__RestaurantClient<$Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     banquetsCreated<T extends User$banquetsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, User$banquetsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BanquetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clients<T extends User$clientsArgs<ExtArgs> = {}>(args?: Subset<T, User$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4161,6 +4174,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BanquetScalarFieldEnum | BanquetScalarFieldEnum[]
+  }
+
+  /**
+   * User.clients
+   */
+  export type User$clientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    where?: ClientWhereInput
+    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
+    cursor?: ClientWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientScalarFieldEnum | ClientScalarFieldEnum[]
   }
 
   /**
@@ -5366,6 +5403,7 @@ export namespace Prisma {
     restaurantId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdById: string | null
   }
 
   export type ClientMaxAggregateOutputType = {
@@ -5376,6 +5414,7 @@ export namespace Prisma {
     restaurantId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    createdById: string | null
   }
 
   export type ClientCountAggregateOutputType = {
@@ -5386,6 +5425,7 @@ export namespace Prisma {
     restaurantId: number
     createdAt: number
     updatedAt: number
+    createdById: number
     _all: number
   }
 
@@ -5398,6 +5438,7 @@ export namespace Prisma {
     restaurantId?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
   }
 
   export type ClientMaxAggregateInputType = {
@@ -5408,6 +5449,7 @@ export namespace Prisma {
     restaurantId?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
   }
 
   export type ClientCountAggregateInputType = {
@@ -5418,6 +5460,7 @@ export namespace Prisma {
     restaurantId?: true
     createdAt?: true
     updatedAt?: true
+    createdById?: true
     _all?: true
   }
 
@@ -5501,6 +5544,7 @@ export namespace Prisma {
     restaurantId: string
     createdAt: Date
     updatedAt: Date
+    createdById: string | null
     _count: ClientCountAggregateOutputType | null
     _min: ClientMinAggregateOutputType | null
     _max: ClientMaxAggregateOutputType | null
@@ -5528,8 +5572,10 @@ export namespace Prisma {
     restaurantId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
     restaurant?: boolean | RestaurantDefaultArgs<ExtArgs>
     banquets?: boolean | Client$banquetsArgs<ExtArgs>
+    createdBy?: boolean | Client$createdByArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
@@ -5541,7 +5587,9 @@ export namespace Prisma {
     restaurantId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
     restaurant?: boolean | RestaurantDefaultArgs<ExtArgs>
+    createdBy?: boolean | Client$createdByArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
   export type ClientSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5552,7 +5600,9 @@ export namespace Prisma {
     restaurantId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
     restaurant?: boolean | RestaurantDefaultArgs<ExtArgs>
+    createdBy?: boolean | Client$createdByArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
   export type ClientSelectScalar = {
@@ -5563,19 +5613,23 @@ export namespace Prisma {
     restaurantId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdById?: boolean
   }
 
-  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phone" | "comment" | "restaurantId" | "createdAt" | "updatedAt", ExtArgs["result"]["client"]>
+  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "phone" | "comment" | "restaurantId" | "createdAt" | "updatedAt" | "createdById", ExtArgs["result"]["client"]>
   export type ClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     restaurant?: boolean | RestaurantDefaultArgs<ExtArgs>
     banquets?: boolean | Client$banquetsArgs<ExtArgs>
+    createdBy?: boolean | Client$createdByArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ClientIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     restaurant?: boolean | RestaurantDefaultArgs<ExtArgs>
+    createdBy?: boolean | Client$createdByArgs<ExtArgs>
   }
   export type ClientIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     restaurant?: boolean | RestaurantDefaultArgs<ExtArgs>
+    createdBy?: boolean | Client$createdByArgs<ExtArgs>
   }
 
   export type $ClientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5583,6 +5637,7 @@ export namespace Prisma {
     objects: {
       restaurant: Prisma.$RestaurantPayload<ExtArgs>
       banquets: Prisma.$BanquetPayload<ExtArgs>[]
+      createdBy: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5592,6 +5647,7 @@ export namespace Prisma {
       restaurantId: string
       createdAt: Date
       updatedAt: Date
+      createdById: string | null
     }, ExtArgs["result"]["client"]>
     composites: {}
   }
@@ -5988,6 +6044,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     restaurant<T extends RestaurantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RestaurantDefaultArgs<ExtArgs>>): Prisma__RestaurantClient<$Result.GetResult<Prisma.$RestaurantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     banquets<T extends Client$banquetsArgs<ExtArgs> = {}>(args?: Subset<T, Client$banquetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BanquetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdBy<T extends Client$createdByArgs<ExtArgs> = {}>(args?: Subset<T, Client$createdByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6024,6 +6081,7 @@ export namespace Prisma {
     readonly restaurantId: FieldRef<"Client", 'String'>
     readonly createdAt: FieldRef<"Client", 'DateTime'>
     readonly updatedAt: FieldRef<"Client", 'DateTime'>
+    readonly createdById: FieldRef<"Client", 'String'>
   }
     
 
@@ -6446,6 +6504,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BanquetScalarFieldEnum | BanquetScalarFieldEnum[]
+  }
+
+  /**
+   * Client.createdBy
+   */
+  export type Client$createdByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -11370,7 +11447,8 @@ export namespace Prisma {
     comment: 'comment',
     restaurantId: 'restaurantId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    createdById: 'createdById'
   };
 
   export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
@@ -11703,6 +11781,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     restaurant?: XOR<RestaurantScalarRelationFilter, RestaurantWhereInput>
     banquetsCreated?: BanquetListRelationFilter
+    clients?: ClientListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -11717,6 +11796,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     restaurant?: RestaurantOrderByWithRelationInput
     banquetsCreated?: BanquetOrderByRelationAggregateInput
+    clients?: ClientOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -11734,6 +11814,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     restaurant?: XOR<RestaurantScalarRelationFilter, RestaurantWhereInput>
     banquetsCreated?: BanquetListRelationFilter
+    clients?: ClientListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -11852,8 +11933,10 @@ export namespace Prisma {
     restaurantId?: StringFilter<"Client"> | string
     createdAt?: DateTimeFilter<"Client"> | Date | string
     updatedAt?: DateTimeFilter<"Client"> | Date | string
+    createdById?: StringNullableFilter<"Client"> | string | null
     restaurant?: XOR<RestaurantScalarRelationFilter, RestaurantWhereInput>
     banquets?: BanquetListRelationFilter
+    createdBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type ClientOrderByWithRelationInput = {
@@ -11864,8 +11947,10 @@ export namespace Prisma {
     restaurantId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
     restaurant?: RestaurantOrderByWithRelationInput
     banquets?: BanquetOrderByRelationAggregateInput
+    createdBy?: UserOrderByWithRelationInput
   }
 
   export type ClientWhereUniqueInput = Prisma.AtLeast<{
@@ -11880,8 +11965,10 @@ export namespace Prisma {
     restaurantId?: StringFilter<"Client"> | string
     createdAt?: DateTimeFilter<"Client"> | Date | string
     updatedAt?: DateTimeFilter<"Client"> | Date | string
+    createdById?: StringNullableFilter<"Client"> | string | null
     restaurant?: XOR<RestaurantScalarRelationFilter, RestaurantWhereInput>
     banquets?: BanquetListRelationFilter
+    createdBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id" | "restaurantId_phone">
 
   export type ClientOrderByWithAggregationInput = {
@@ -11892,6 +11979,7 @@ export namespace Prisma {
     restaurantId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrderInput | SortOrder
     _count?: ClientCountOrderByAggregateInput
     _max?: ClientMaxOrderByAggregateInput
     _min?: ClientMinOrderByAggregateInput
@@ -11908,6 +11996,7 @@ export namespace Prisma {
     restaurantId?: StringWithAggregatesFilter<"Client"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Client"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Client"> | Date | string
+    createdById?: StringNullableWithAggregatesFilter<"Client"> | string | null
   }
 
   export type BanquetWhereInput = {
@@ -12400,6 +12489,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     restaurant: RestaurantCreateNestedOneWithoutUsersInput
     banquetsCreated?: BanquetCreateNestedManyWithoutCreatedByInput
+    clients?: ClientCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -12413,6 +12503,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     banquetsCreated?: BanquetUncheckedCreateNestedManyWithoutCreatedByInput
+    clients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUpdateInput = {
@@ -12426,6 +12517,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     restaurant?: RestaurantUpdateOneRequiredWithoutUsersNestedInput
     banquetsCreated?: BanquetUpdateManyWithoutCreatedByNestedInput
+    clients?: ClientUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -12439,6 +12531,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     banquetsCreated?: BanquetUncheckedUpdateManyWithoutCreatedByNestedInput
+    clients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -12565,6 +12658,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     restaurant: RestaurantCreateNestedOneWithoutClientsInput
     banquets?: BanquetCreateNestedManyWithoutClientInput
+    createdBy?: UserCreateNestedOneWithoutClientsInput
   }
 
   export type ClientUncheckedCreateInput = {
@@ -12575,6 +12669,7 @@ export namespace Prisma {
     restaurantId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
     banquets?: BanquetUncheckedCreateNestedManyWithoutClientInput
   }
 
@@ -12587,6 +12682,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     restaurant?: RestaurantUpdateOneRequiredWithoutClientsNestedInput
     banquets?: BanquetUpdateManyWithoutClientNestedInput
+    createdBy?: UserUpdateOneWithoutClientsNestedInput
   }
 
   export type ClientUncheckedUpdateInput = {
@@ -12597,6 +12693,7 @@ export namespace Prisma {
     restaurantId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
     banquets?: BanquetUncheckedUpdateManyWithoutClientNestedInput
   }
 
@@ -12608,6 +12705,7 @@ export namespace Prisma {
     restaurantId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
   }
 
   export type ClientUpdateManyMutationInput = {
@@ -12627,6 +12725,7 @@ export namespace Prisma {
     restaurantId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BanquetCreateInput = {
@@ -13395,6 +13494,11 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
   export type ClientRestaurantIdPhoneCompoundUniqueInput = {
     restaurantId: string
     phone: string
@@ -13408,6 +13512,7 @@ export namespace Prisma {
     restaurantId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
   }
 
   export type ClientMaxOrderByAggregateInput = {
@@ -13418,6 +13523,7 @@ export namespace Prisma {
     restaurantId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
   }
 
   export type ClientMinOrderByAggregateInput = {
@@ -13428,6 +13534,7 @@ export namespace Prisma {
     restaurantId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdById?: SortOrder
   }
 
   export type EnumBanquetStatusFilter<$PrismaModel = never> = {
@@ -13955,11 +14062,25 @@ export namespace Prisma {
     connect?: BanquetWhereUniqueInput | BanquetWhereUniqueInput[]
   }
 
+  export type ClientCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput> | ClientCreateWithoutCreatedByInput[] | ClientUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutCreatedByInput | ClientCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ClientCreateManyCreatedByInputEnvelope
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+  }
+
   export type BanquetUncheckedCreateNestedManyWithoutCreatedByInput = {
     create?: XOR<BanquetCreateWithoutCreatedByInput, BanquetUncheckedCreateWithoutCreatedByInput> | BanquetCreateWithoutCreatedByInput[] | BanquetUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: BanquetCreateOrConnectWithoutCreatedByInput | BanquetCreateOrConnectWithoutCreatedByInput[]
     createMany?: BanquetCreateManyCreatedByInputEnvelope
     connect?: BanquetWhereUniqueInput | BanquetWhereUniqueInput[]
+  }
+
+  export type ClientUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput> | ClientCreateWithoutCreatedByInput[] | ClientUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutCreatedByInput | ClientCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ClientCreateManyCreatedByInputEnvelope
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
   }
 
   export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -13988,6 +14109,20 @@ export namespace Prisma {
     deleteMany?: BanquetScalarWhereInput | BanquetScalarWhereInput[]
   }
 
+  export type ClientUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput> | ClientCreateWithoutCreatedByInput[] | ClientUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutCreatedByInput | ClientCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ClientUpsertWithWhereUniqueWithoutCreatedByInput | ClientUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ClientCreateManyCreatedByInputEnvelope
+    set?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    disconnect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    delete?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    update?: ClientUpdateWithWhereUniqueWithoutCreatedByInput | ClientUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ClientUpdateManyWithWhereWithoutCreatedByInput | ClientUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ClientScalarWhereInput | ClientScalarWhereInput[]
+  }
+
   export type BanquetUncheckedUpdateManyWithoutCreatedByNestedInput = {
     create?: XOR<BanquetCreateWithoutCreatedByInput, BanquetUncheckedCreateWithoutCreatedByInput> | BanquetCreateWithoutCreatedByInput[] | BanquetUncheckedCreateWithoutCreatedByInput[]
     connectOrCreate?: BanquetCreateOrConnectWithoutCreatedByInput | BanquetCreateOrConnectWithoutCreatedByInput[]
@@ -14000,6 +14135,20 @@ export namespace Prisma {
     update?: BanquetUpdateWithWhereUniqueWithoutCreatedByInput | BanquetUpdateWithWhereUniqueWithoutCreatedByInput[]
     updateMany?: BanquetUpdateManyWithWhereWithoutCreatedByInput | BanquetUpdateManyWithWhereWithoutCreatedByInput[]
     deleteMany?: BanquetScalarWhereInput | BanquetScalarWhereInput[]
+  }
+
+  export type ClientUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput> | ClientCreateWithoutCreatedByInput[] | ClientUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutCreatedByInput | ClientCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ClientUpsertWithWhereUniqueWithoutCreatedByInput | ClientUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ClientCreateManyCreatedByInputEnvelope
+    set?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    disconnect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    delete?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    update?: ClientUpdateWithWhereUniqueWithoutCreatedByInput | ClientUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ClientUpdateManyWithWhereWithoutCreatedByInput | ClientUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ClientScalarWhereInput | ClientScalarWhereInput[]
   }
 
   export type RestaurantCreateNestedOneWithoutHallsInput = {
@@ -14079,6 +14228,12 @@ export namespace Prisma {
     connect?: BanquetWhereUniqueInput | BanquetWhereUniqueInput[]
   }
 
+  export type UserCreateNestedOneWithoutClientsInput = {
+    create?: XOR<UserCreateWithoutClientsInput, UserUncheckedCreateWithoutClientsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientsInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type BanquetUncheckedCreateNestedManyWithoutClientInput = {
     create?: XOR<BanquetCreateWithoutClientInput, BanquetUncheckedCreateWithoutClientInput> | BanquetCreateWithoutClientInput[] | BanquetUncheckedCreateWithoutClientInput[]
     connectOrCreate?: BanquetCreateOrConnectWithoutClientInput | BanquetCreateOrConnectWithoutClientInput[]
@@ -14106,6 +14261,16 @@ export namespace Prisma {
     update?: BanquetUpdateWithWhereUniqueWithoutClientInput | BanquetUpdateWithWhereUniqueWithoutClientInput[]
     updateMany?: BanquetUpdateManyWithWhereWithoutClientInput | BanquetUpdateManyWithWhereWithoutClientInput[]
     deleteMany?: BanquetScalarWhereInput | BanquetScalarWhereInput[]
+  }
+
+  export type UserUpdateOneWithoutClientsNestedInput = {
+    create?: XOR<UserCreateWithoutClientsInput, UserUncheckedCreateWithoutClientsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientsInput
+    upsert?: UserUpsertWithoutClientsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutClientsInput, UserUpdateWithoutClientsInput>, UserUncheckedUpdateWithoutClientsInput>
   }
 
   export type BanquetUncheckedUpdateManyWithoutClientNestedInput = {
@@ -14568,6 +14733,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     banquetsCreated?: BanquetCreateNestedManyWithoutCreatedByInput
+    clients?: ClientCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutRestaurantInput = {
@@ -14580,6 +14746,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     banquetsCreated?: BanquetUncheckedCreateNestedManyWithoutCreatedByInput
+    clients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutRestaurantInput = {
@@ -14632,6 +14799,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     banquets?: BanquetCreateNestedManyWithoutClientInput
+    createdBy?: UserCreateNestedOneWithoutClientsInput
   }
 
   export type ClientUncheckedCreateWithoutRestaurantInput = {
@@ -14641,6 +14809,7 @@ export namespace Prisma {
     comment?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
     banquets?: BanquetUncheckedCreateNestedManyWithoutClientInput
   }
 
@@ -14832,6 +15001,7 @@ export namespace Prisma {
     restaurantId?: StringFilter<"Client"> | string
     createdAt?: DateTimeFilter<"Client"> | Date | string
     updatedAt?: DateTimeFilter<"Client"> | Date | string
+    createdById?: StringNullableFilter<"Client"> | string | null
   }
 
   export type BanquetUpsertWithWhereUniqueWithoutRestaurantInput = {
@@ -15001,6 +15171,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ClientCreateWithoutCreatedByInput = {
+    id?: string
+    name: string
+    phone: string
+    comment?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    restaurant: RestaurantCreateNestedOneWithoutClientsInput
+    banquets?: BanquetCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    name: string
+    phone: string
+    comment?: string | null
+    restaurantId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    banquets?: BanquetUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutCreatedByInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ClientCreateManyCreatedByInputEnvelope = {
+    data: ClientCreateManyCreatedByInput | ClientCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RestaurantUpsertWithoutUsersInput = {
     update: XOR<RestaurantUpdateWithoutUsersInput, RestaurantUncheckedUpdateWithoutUsersInput>
     create: XOR<RestaurantCreateWithoutUsersInput, RestaurantUncheckedCreateWithoutUsersInput>
@@ -15060,6 +15262,22 @@ export namespace Prisma {
   export type BanquetUpdateManyWithWhereWithoutCreatedByInput = {
     where: BanquetScalarWhereInput
     data: XOR<BanquetUpdateManyMutationInput, BanquetUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type ClientUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: ClientWhereUniqueInput
+    update: XOR<ClientUpdateWithoutCreatedByInput, ClientUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ClientUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: ClientWhereUniqueInput
+    data: XOR<ClientUpdateWithoutCreatedByInput, ClientUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type ClientUpdateManyWithWhereWithoutCreatedByInput = {
+    where: ClientScalarWhereInput
+    data: XOR<ClientUpdateManyMutationInput, ClientUncheckedUpdateManyWithoutCreatedByInput>
   }
 
   export type RestaurantCreateWithoutHallsInput = {
@@ -15309,6 +15527,37 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type UserCreateWithoutClientsInput = {
+    id?: string
+    name: string
+    email: string
+    phone?: string | null
+    passwordHash: string
+    role: $Enums.UserRole
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    restaurant: RestaurantCreateNestedOneWithoutUsersInput
+    banquetsCreated?: BanquetCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutClientsInput = {
+    id?: string
+    name: string
+    email: string
+    phone?: string | null
+    passwordHash: string
+    role: $Enums.UserRole
+    restaurantId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    banquetsCreated?: BanquetUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutClientsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutClientsInput, UserUncheckedCreateWithoutClientsInput>
+  }
+
   export type RestaurantUpsertWithoutClientsInput = {
     update: XOR<RestaurantUpdateWithoutClientsInput, RestaurantUncheckedUpdateWithoutClientsInput>
     create: XOR<RestaurantCreateWithoutClientsInput, RestaurantUncheckedCreateWithoutClientsInput>
@@ -15370,6 +15619,43 @@ export namespace Prisma {
     data: XOR<BanquetUpdateManyMutationInput, BanquetUncheckedUpdateManyWithoutClientInput>
   }
 
+  export type UserUpsertWithoutClientsInput = {
+    update: XOR<UserUpdateWithoutClientsInput, UserUncheckedUpdateWithoutClientsInput>
+    create: XOR<UserCreateWithoutClientsInput, UserUncheckedCreateWithoutClientsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutClientsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutClientsInput, UserUncheckedUpdateWithoutClientsInput>
+  }
+
+  export type UserUpdateWithoutClientsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    restaurant?: RestaurantUpdateOneRequiredWithoutUsersNestedInput
+    banquetsCreated?: BanquetUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutClientsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    restaurantId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    banquetsCreated?: BanquetUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
   export type RestaurantCreateWithoutBanquetsInput = {
     id?: string
     name: string
@@ -15417,6 +15703,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     restaurant: RestaurantCreateNestedOneWithoutClientsInput
+    createdBy?: UserCreateNestedOneWithoutClientsInput
   }
 
   export type ClientUncheckedCreateWithoutBanquetsInput = {
@@ -15427,6 +15714,7 @@ export namespace Prisma {
     restaurantId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
   }
 
   export type ClientCreateOrConnectWithoutBanquetsInput = {
@@ -15471,6 +15759,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     restaurant: RestaurantCreateNestedOneWithoutUsersInput
+    clients?: ClientCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserUncheckedCreateWithoutBanquetsCreatedInput = {
@@ -15483,6 +15772,7 @@ export namespace Prisma {
     restaurantId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    clients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
   export type UserCreateOrConnectWithoutBanquetsCreatedInput = {
@@ -15582,6 +15872,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     restaurant?: RestaurantUpdateOneRequiredWithoutClientsNestedInput
+    createdBy?: UserUpdateOneWithoutClientsNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutBanquetsInput = {
@@ -15592,6 +15883,7 @@ export namespace Prisma {
     restaurantId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type HallUpsertWithoutBanquetsInput = {
@@ -15648,6 +15940,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     restaurant?: RestaurantUpdateOneRequiredWithoutUsersNestedInput
+    clients?: ClientUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBanquetsCreatedInput = {
@@ -15660,6 +15953,7 @@ export namespace Prisma {
     restaurantId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    clients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type PaymentUpsertWithWhereUniqueWithoutBanquetInput = {
@@ -16019,6 +16313,7 @@ export namespace Prisma {
     comment?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdById?: string | null
   }
 
   export type BanquetCreateManyRestaurantInput = {
@@ -16065,6 +16360,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     banquetsCreated?: BanquetUpdateManyWithoutCreatedByNestedInput
+    clients?: ClientUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRestaurantInput = {
@@ -16077,6 +16373,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     banquetsCreated?: BanquetUncheckedUpdateManyWithoutCreatedByNestedInput
+    clients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutRestaurantInput = {
@@ -16130,6 +16427,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     banquets?: BanquetUpdateManyWithoutClientNestedInput
+    createdBy?: UserUpdateOneWithoutClientsNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutRestaurantInput = {
@@ -16139,6 +16437,7 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
     banquets?: BanquetUncheckedUpdateManyWithoutClientNestedInput
   }
 
@@ -16149,6 +16448,7 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdById?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BanquetUpdateWithoutRestaurantInput = {
@@ -16276,6 +16576,16 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type ClientCreateManyCreatedByInput = {
+    id?: string
+    name: string
+    phone: string
+    comment?: string | null
+    restaurantId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type BanquetUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16337,6 +16647,38 @@ export namespace Prisma {
     restaurantId?: StringFieldUpdateOperationsInput | string
     clientId?: StringFieldUpdateOperationsInput | string
     hallId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    restaurant?: RestaurantUpdateOneRequiredWithoutClientsNestedInput
+    banquets?: BanquetUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    restaurantId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    banquets?: BanquetUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    restaurantId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

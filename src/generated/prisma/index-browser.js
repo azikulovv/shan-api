@@ -163,7 +163,8 @@ exports.Prisma.ClientScalarFieldEnum = {
   comment: 'comment',
   restaurantId: 'restaurantId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  createdById: 'createdById'
 };
 
 exports.Prisma.BanquetScalarFieldEnum = {

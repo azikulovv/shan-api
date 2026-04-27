@@ -5,6 +5,13 @@ export const getClientsService = async (restaurantId: string) => {
   return prisma.client.findMany({
     where: { restaurantId },
     orderBy: { createdAt: 'desc' },
+    include: {
+      createdBy: {
+        omit: {
+          passwordHash: true,
+        },
+      },
+    },
   })
 }
 
