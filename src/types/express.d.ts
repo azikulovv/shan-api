@@ -1,3 +1,5 @@
+import type { Logger } from 'pino'
+
 declare namespace Express {
   export interface Request {
     user?: {
@@ -5,5 +7,6 @@ declare namespace Express {
       restaurantId: string
       role: 'OWNER' | 'ADMIN'
     }
+    log: Logger
   }
 }

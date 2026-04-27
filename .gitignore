@@ -5,6 +5,7 @@ node_modules/
 .DS_Store
 
 src/prisma/dev.db
+dev.db
 
 dist/
 build/
